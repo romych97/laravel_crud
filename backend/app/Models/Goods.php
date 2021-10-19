@@ -12,7 +12,7 @@ class Goods extends Model
     const CREATED_AT = 'created';
     const UPDATED_AT = 'changed';
 
-    protected $fillable = ['title', 'brand', 'item', 'stock', 'sku'];
+    protected $fillable = ['title', 'brand', 'item', 'stock', 'sku', 'status'];
 
     protected $table = 'rvc_goods';
 

@@ -32,6 +32,7 @@ export default function CreateModal(props) {
                 "stars": document.getElementById('stars3').value,
                 "email": document.getElementById('email3').value,
                 "address": document.getElementById('address3').value,
+                "sku": document.getElementById('sku3').value,
             }
         }
         let response = await fetch(API_BASE_URL + `/${ props.type }`, {
@@ -43,7 +44,13 @@ export default function CreateModal(props) {
             body: JSON.stringify(json)
         });
         if (response.ok) {
-            console.log(response)
+            response.json().then(data => {
+                console.log(data)
+                props.setData(prevState => ({ 
+                    ...prevState, [props.type]: prevState[props.type].concat([data]) 
+                }));
+                props.setCreateModal({type: '', show: false})
+            })
         }
     }
     
@@ -112,8 +119,8 @@ export default function CreateModal(props) {
                                 <input type="text" className="form-control" id="status3" aria-describedby="emailHelp" placeholder="" />
                             </div>
                             <div className="form-group mt-2">
-                                <label htmlFor="users3">Users</label>
-                                <input type="text" className="form-control" id="users3" aria-describedby="emailHelp" placeholder="" />
+                                <label htmlFor="users3">User</label>
+                                <input type="text" className="form-control" id="user3" aria-describedby="emailHelp" placeholder="" />
                             </div>
                             <div className="form-group mt-2">
                                 <label htmlFor="stars3">Stars</label>
@@ -126,6 +133,10 @@ export default function CreateModal(props) {
                             <div className="form-group mt-2">
                                 <label htmlFor="address3">Address</label>
                                 <input type="text" className="form-control" id="address3" aria-describedby="emailHelp" placeholder="" />
+                            </div>
+                            <div className="form-group mt-2">
+                                <label htmlFor="sku3">Sku</label>
+                                <input type="text" className="form-control" id="sku3" aria-describedby="emailHelp" placeholder="" />
                             </div>
                         </form>
                     </div> : null }

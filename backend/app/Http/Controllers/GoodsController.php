@@ -17,6 +17,15 @@ class GoodsController extends Controller
         // return new GoodsResource(Goods::findOrFail($id));
     }
 
+    public function edit(Request $request, $id) {
+
+        Goods::whereId($id)->update($request->all());
+        $selection = Goods::find($id);
+        $selection->update($request->all());
+
+        return response($request, 201);
+    }
+
     public function store(Request $request) {
         
         // return $request;
@@ -27,7 +36,7 @@ class GoodsController extends Controller
 
         $good = Goods::create($request->all());
 
-        return response(null, 201);
+        return response($good, 201);
     }
 
     public function destroy($id) {

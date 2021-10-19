@@ -8,7 +8,7 @@ use App\Models\ShippedOrders;
 
 class ShippedOrdersController extends Controller {
  
-    public function search(Request $request){
+    public function search(Request $request) {
 
         // Get the search value from the request
         $search = $request->input('search');
@@ -20,4 +20,24 @@ class ShippedOrdersController extends Controller {
         return $results;
         // return [];
     }
+
+    public function store(Request $request) {
+        
+        // $request->validate([
+        //     'name' => 'required|max:255',
+        // ]);
+
+        $ShippedOrders = ShippedOrders::create($request->all());
+
+        return response($ShippedOrders, 201);
+    }
+
+    public function destroy($id) {
+        $ShippedOrders = ShippedOrders::findOrFail($id);
+        $ShippedOrders->delete();
+
+        // return response()->json(null, 204);
+        return response(null, 204);
+    }
+
 }

@@ -6,6 +6,34 @@ import EditModal from '../Modals/EditModal'
 
 export default function MainPage() {
 
+    const goodsElements = [
+        { "name": "id", "id": "id1", "showInHTML" : true  },
+        { "name": "status", "id": "status1", "showInHTML" : true },
+        { "name": "brand", "id": "brand1", "showInHTML" : true },
+        { "name": "item", "id": "item1", "showInHTML" : true  },
+        { "name": "stock", "id": "stock1", "showInHTML" : true  },
+    ]
+
+    const sitesElements = [
+        { "name": "id", "id": "id2", "showInHTML" : true  },
+        { "name": "status", "id": "status2", "showInHTML" : true },
+        { "name": "domain", "id": "domain2", "showInHTML" : true },
+        { "name": "brand", "id": "brand2", "showInHTML" : true  },
+        { "name": "username", "id": "username2", "showInHTML" : true  },
+    ]
+
+    const shippedOrderElements = [
+        { "name": "id", "id": "id3", "showInHTML" : true  },
+        { "name": "host", "id": "host3", "showInHTML" : true },
+        { "name": "num", "id": "num3", "showInHTML" : true },
+        { "name": "status", "id": "status3", "showInHTML" : true  },
+        { "name": "users", "id": "users3", "showInHTML" : true  },
+        { "name": "stars", "id": "stars3", "showInHTML" : true  },
+        { "name": "email", "id": "email3", "showInHTML" : true  },
+        { "name": "address", "id": "address3", "showInHTML" : true  },
+        { "name": "host", "id": "host3", "showInHTML" : true  },
+    ]
+
     const [combinedData, setData] = useState([]);
 
     const [activeTab, setActiveTab] = useState('goods');
@@ -106,43 +134,30 @@ export default function MainPage() {
                         <table className="table">
                             <thead>
                                 <tr className="text-small">
-                                    <td className="text-nowrap" scope="col">ID</td>
-                                    {/* <td className="text-nowrap" scope="col">Created At</td>
-                                    <td className="text-nowrap" scope="col">Updated At</td> */}
-                                    <td className="text-nowrap" scope="col">Status</td>
-                                    {/* <td className="text-nowrap" scope="col">Site ID</td> */}
-                                    <td className="text-nowrap" scope="col">Brand</td>
-                                    <td className="text-nowrap" scope="col">Item</td>
-                                    {/* <td className="text-nowrap" scope="col">Category ID</td> */}
-                                    {/* <td className="text-nowrap" scope="col">SKU</td> */}
-                                    {/* <td className="text-small text-nowrap" scope="col">ASIN</td> */}
-                                    <td className="text-nowrap" scope="col">Stock</td>
-                                    <td className="text-nowrap" scope="col">Actions</td>
+
+                                    {/* Iterate inner of goods json relate on goodsElement variable */}
+                                    { goodsElements ? goodsElements.map((goodElement, j) => (
+                                        <td className="text-small text-nowrap" scope="col" key={ j }> { goodElement.name } </td>
+                                    )) : null}
+
+                                    <td className="text-small text-nowrap" scope="col">Actions</td>
                                 </tr>
                             </thead>
                             <tbody style={{"borderColor": "#f8f9fa"}}>
-                                
                                 { combinedData && combinedData.goods ? combinedData.goods.map((item, index) => (
-                                    <tr key={index} className="text-small">
-                                        <td className="text-nowrap">{ item['id'] }</td>
-                                        {/* <td className="text-nowrap">{ item['created'] }</td>
-                                        <td className="text-nowrap">{ item['changed'] }</td> */}
-                                        <td className="text-nowrap">{ item['status'] }</td>
-                                        {/* <td>{ item['site-id'] }</td> */}
-                                        <td className="text-nowrap">{ item['brand'] }</td>
-                                        <td className="text-nowrap">{ item['item'] }</td>
-                                        {/* <td>{ item['category-id'] }</td> */}
-                                        {/* <td>{ item['sku'] }</td> */}
-                                        {/* <td>{ item['asin'] }</td> */}
-                                        <td className="text-nowrap">{ item['stock'] }</td>
+                                    <tr className="text-small" key={ index }>
+
+                                        {/* Iterate inner of goods json relate on goodsElement variable */}
+                                        { goodsElements ? goodsElements.map((goodElement, j) => (
+                                            <td key={ j }> { item[goodElement.name] } </td>
+                                        )) : null}
+                                        
                                         <td className="text-nowrap">
-                                            {/* <button className="btn text-small btn-primary px-2 py-1 mx-1">E</button> */}
                                             <button onClick={ (e) => setEditModal({type: 'goods', show: true, index: index}) } className="btn text-small btn-primary px-2 py-1">Edit</button>
-                                            <button onClick={ (e) => removeCombinedData(item['id'], index, 'goods') } className="btn text-small btn-danger px-2 py-1 mx-1">Remove</button>
+                                            <button onClick={ (e) => removeCombinedData(item['id'], index, 'sites') } className="btn text-small btn-danger px-2 py-1 mx-1">Remove</button>
                                         </td>
                                     </tr>
                                 )) : null }
-
                             </tbody>
                         </table>
                     </div>
@@ -150,30 +165,22 @@ export default function MainPage() {
                         <table className="table">
                             <thead>
                                 <tr>
-                                    <td className="text-small text-nowrap" scope="col">ID</td>
-                                    {/* <td className="text-small text-nowrap" scope="col">Created At</td>
-                                    <td className="text-small text-nowrap" scope="col">Updated At</td> */}
-                                    <td className="text-small text-nowrap" scope="col">Status</td>
-                                    <td className="text-small text-nowrap" scope="col">Domain</td>
-                                    <td className="text-small text-nowrap" scope="col">Brand</td>
-                                    <td className="text-small text-nowrap" scope="col">Username</td>
-                                    {/* <td className="text-small text-nowrap" scope="col">Domain</td> */}
-                                    {/* <td className="text-small text-nowrap" scope="col">Password</td> */}
-                                    <td className="text-nowrap" scope="col">Actions</td>
+                                    { sitesElements ? sitesElements.map((siteElement, j) => (
+                                        <td key={ j } className="text-small text-nowrap" scope="col"> { siteElement.name } </td>
+                                    )) : null}
+                                    <td className="text-small text-nowrap" scope="col">Actions</td>
                                 </tr>
                             </thead>
                             <tbody style={{"borderColor": "#f8f9fa"}}>
                                 { combinedData && combinedData.sites ? combinedData.sites.map((item, index) => (
-                                    <tr key={index} className="text-small">
-                                        <td className="text-nowrap">{item['id']}</td>
-                                        {/* <td className="text-nowrap">{item['created']}</td>
-                                        <td className="text-nowrap">{item['updated']}</td> */}
-                                        <td className="text-nowrap">{item['status']}</td>
-                                        <td className="text-nowrap">{item['domain']}</td>
-                                        <td className="text-nowrap">{item['brand']}</td>
-                                        <td className="text-nowrap">{item['username']}</td>
+                                    <tr className="text-small" key={ index }>
+
+                                        {/* Iterate inner of sites json relate on sitesElements variable */}
+                                        { sitesElements ? sitesElements.map((sitesElements, j) => (
+                                            <td key={ j }> { item[sitesElements.name] } </td>
+                                        )) : null}
+                                        
                                         <td className="text-nowrap">
-                                            {/* <button className="btn text-small btn-primary px-2 py-1 mx-1">E</button> */}
                                             <button onClick={ (e) => setEditModal({type: 'sites', show: true, index: index}) } className="btn text-small btn-primary px-2 py-1">Edit</button>
                                             <button onClick={ (e) => removeCombinedData(item['id'], index, 'sites') } className="btn text-small btn-danger px-2 py-1 mx-1">Remove</button>
                                         </td>
@@ -186,19 +193,15 @@ export default function MainPage() {
                         <table className="table">
                             <thead>
                                 <tr>
-                                    <td className="text-nowrap" scope="col">ID</td>
-                                    {/* <td className="text-nowrap" scope="col">Created At</td>
-                                    <td className="text-nowrap" scope="col">Updated At</td> */}
-                                    <td className="text-nowrap" scope="col">Host</td>
-                                    <td className="text-nowrap" scope="col">Num</td>
-                                    <td className="text-nowrap" scope="col">Status</td>
-                                    <td className="text-nowrap" scope="col">Users</td>
-                                    {/* <td scope="col">Sendings</td> */}
-                                    {/* <td className="text-nowrap" scope="col">SKU</td> */}
-                                    <td className="text-nowrap" scope="col">Stars</td>
-                                    <td className="text-nowrap" scope="col">Email</td>
-                                    <td className="text-nowrap" scope="col">Address</td>
-                                    <td className="text-nowrap" scope="col">Actions</td>
+
+                                    {/* Iterate inner of goods json relate on goodsElement variable */}
+                                    { shippedOrderElements ? shippedOrderElements.map((shippedOrderElement, j) => (
+                                        <td className="text-small text-nowrap" scope="col" key={ j }> 
+                                            { shippedOrderElement.name } 
+                                        </td>
+                                    )) : null}
+
+                                    <td className="text-small text-nowrap" scope="col">Actions</td>
                                 </tr>
                             </thead>
                             <tbody style={{"borderColor": "#f8f9fa"}}>
@@ -227,7 +230,7 @@ export default function MainPage() {
                 </div>
 
                 {/* EDIT MODAL */}
-                    { editModal.show && <EditModal combinedData={ combinedData } saveCombinedData={ saveCombinedData } 
+                    { editModal.show && <EditModal setData={ setData } combinedData={ combinedData } saveCombinedData={ saveCombinedData } 
                                                    setEditModal={ setEditModal } editModal={ editModal }/> }
                 {/* !EDIT MODAL */}
 

@@ -31,3 +31,7 @@ Route::delete('/shippedOrders/{id}', 'App\Http\Controllers\ShippedOrdersControll
 Route::post('/goods', 'App\Http\Controllers\GoodsController@store');
 Route::post('/sites', 'App\Http\Controllers\SitesController@store');
 Route::post('/shippedOrders', 'App\Http\Controllers\ShippedOrdersController@store');
+
+Route::post('/goods/{id}', 'App\Http\Controllers\GoodsController@edit');
+Route::post('/sites/{id}', 'App\Http\Controllers\SitesController@edit');
+Route::post('/shippedOrders/{id}', 'App\Http\Controllers\ShippedOrdersController@edit');
